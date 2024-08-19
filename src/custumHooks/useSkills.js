@@ -6,6 +6,7 @@ import { requestStates } from '../constants';
 export const useSkills = () => {
   const [state, dispatch] = useReducer(skillReducer, initialState);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchReposApi = () => {
     axios.get('https://api.github.com/users/pistachio-258/repos')
       .then((response) => {
@@ -21,7 +22,7 @@ export const useSkills = () => {
   useEffect(() => {
     if (state.requestState !== requestStates.loading) { return; }
     fetchReposApi();
-  }, [state.requestState]);
+  }, [state.requestState, fetchReposApi]);
 
   useEffect(() => {
     dispatch({ type: actionTypes.fetch });
